@@ -1,0 +1,44 @@
+name: climate-disease-uncertainty
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  # Core
+  - python>=3.8
+  - pip
+  # Climepi dependencies (to ensure installed from conda-forge not pip)
+  - bottleneck
+  - dask
+  - flox
+  - geopy
+  - geoviews  
+  - hvplot
+  - intake
+  - intake-esm  
+  - nc-time-axis
+  - numpy
+  - pandas
+  - panel
+  - param
+  - pooch
+  - requests
+  - s3fs # needed when using intake-esm to access CESM data on AWS server
+  - urllib3
+  - xarray
+  - xcdat
+  # Climepi package
+  - pip:
+    - git+https://github.com/will-s-hart/climate-epidemics.git
+  # Linting
+  - ruff
+  # Notebooks
+  - ipykernel
+  - jupyter_bokeh
+  - nbconvert
+  # Paper figures
+  - selenium
+  - svgutils
+  - webdriver-manager
+  # Workflow
+  - snakemake
