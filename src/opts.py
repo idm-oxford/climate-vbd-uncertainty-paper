@@ -11,6 +11,7 @@ def get_opts():
     epi_model_species_default = "𝘈𝘦. 𝘢𝘭𝘣𝘰𝘱𝘪𝘤𝘵𝘶𝘴"
     epi_model_name_additional = "mordecai_ae_aegypti_niche"
     epi_model_species_additional = "𝘈𝘦. 𝘢𝘦𝘨𝘺𝘱𝘵𝘪"
+    confidence_level = 90
     polyfit_degree = 3
     plot_opts_base = {
         "title": "",
@@ -43,6 +44,7 @@ def get_opts():
         "epi_model_species_default": epi_model_species_default,
         "epi_model_name_additional": epi_model_name_additional,
         "epi_model_species_additional": epi_model_species_additional,
+        "confidence_level": confidence_level,
         "polyfit_degree": polyfit_degree,
         "plot_opts_temp": plot_opts_temp,
         "plot_opts_epi": plot_opts_epi,

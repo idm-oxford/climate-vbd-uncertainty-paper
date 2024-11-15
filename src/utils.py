@@ -3,6 +3,7 @@ import pathlib
 from math import ceil
 
 import bokeh.layouts as bl
+import bokeh.plotting as bp
 import holoviews as hv
 import svgutils.transform as svgt
 from bokeh.io import export_svg
@@ -26,30 +27,30 @@ def get_data_base_path():
     return pathlib.Path(__file__).parents[1] / "data"
 
 
-def make_figure(
+def export_figure(
     save_path,
-    panel_list_hv,
+    panel_list,
     tiling=None,
     show_legend_list=None,
     reverse_legend_entries_list=None,
     legend_location_list=None,
 ):
+    panel_list = _render_panels(panel_list)
     if show_legend_list is None:
-        show_legend_list = [True] * len(panel_list_hv)
+        show_legend_list = [True] * len(panel_list)
     if reverse_legend_entries_list is None:
-        reverse_legend_entries_list = [False] * len(panel_list_hv)
+        reverse_legend_entries_list = [False] * len(panel_list)
     if legend_location_list is None:
-        legend_location_list = [None] * len(panel_list_hv)
-    no_panels = len(panel_list_hv)
+        legend_location_list = [None] * len(panel_list)
+    no_panels = len(panel_list)
     if tiling is not None:
         rows, cols = tiling
     else:
         rows = 1 + (no_panels - 1) // 3
         cols = ceil(no_panels // rows)
-    panel_list_bokeh = _render_panels(panel_list_hv)
     panel_label_list = [chr(65 + i) + "." for i in range(no_panels)]
     for p, show_legend, reverse_legend_entries, legend_location, panel_label in zip(
-        panel_list_bokeh,
+        panel_list,
         show_legend_list,
         reverse_legend_entries_list,
         legend_location_list,
@@ -63,7 +64,7 @@ def make_figure(
             panel_label=panel_label,
         )
     grid = bl.gridplot(
-        panel_list_bokeh,
+        panel_list,
         ncols=cols,
         merge_tools=False,
         toolbar_location=None,
@@ -73,8 +74,8 @@ def make_figure(
     _export_figure(grid, save_path)
 
 
-def make_main_figure(panel_list_hv):
-    panel_list_bokeh = _render_panels(panel_list_hv)
+def export_main_figure(panel_list):
+    panel_list = _render_panels(panel_list)
     panel_label_list = [
         "Internal climate variability",
         "Climate model uncertainty",
@@ -86,7 +87,7 @@ def make_main_figure(panel_list_hv):
     reverse_legend_entries_list = [True, False, False, True, None]
     legend_location_list = [None, None, None, (7, 184), None]
     for p, show_legend, reverse_legend_entries, legend_location, panel_label in zip(
-        panel_list_bokeh,
+        panel_list,
         show_legend_list,
         reverse_legend_entries_list,
         legend_location_list,
@@ -102,14 +103,14 @@ def make_main_figure(panel_list_hv):
         p.title.align = "left"
         p.title.offset = -50
         p.title.standoff = 15
-    for p in panel_list_bokeh[0:3]:
+    for p in panel_list[0:3]:
         p.frame_height = 182
         p.title.text_font_size = "14pt"
         p.yaxis.axis_label = "Annual mean temp. (°C)"
         p.legend.margin = 5
         p.legend.padding = 5
-    col1 = bl.column(panel_list_bokeh[0:3])
-    col2 = bl.column(panel_list_bokeh[3:])
+    col1 = bl.column(panel_list[0:3])
+    col2 = bl.column(panel_list[3:])
     layout = bl.row([col1, bl.Spacer(width=50), col2])
     # Export combined panels to SV
     figure_dir = opts.get_opts()["figure_dir"]
@@ -123,8 +124,39 @@ def make_main_figure(panel_list_hv):
     fig.save(final_save_path)
 
 
-def _render_panels(panel_list_hv):
-    return [hv.render(p) for p in panel_list_hv]
+def export_sensitivity_figure(panel_list):
+    panel_list = _render_panels(panel_list)
+    panel_label_list = ["A.", "B.", "C."]
+    show_legend_list = [True] * len(panel_list)
+    legend_location_list = [None, None, None]
+    for p, show_legend, legend_location, panel_label in zip(
+        panel_list,
+        show_legend_list,
+        legend_location_list,
+        panel_label_list,
+    ):
+        _format_bokeh_panel(
+            p,
+            show_legend=show_legend,
+            legend_location=legend_location,
+            panel_label=panel_label,
+        )
+        p.title.offset = 755
+    layout = bl.column(panel_list)
+    figure_dir = opts.get_opts()["figure_dir"]
+    panels_save_path = figure_dir / "sensitivity_location_model.svg"
+    _export_figure(layout, save_path=panels_save_path)
+
+
+def _render_panels(panel_list):
+    # Render HoloViews objects to Bokeh figures
+    panel_list_rendered = []
+    for p in panel_list:
+        if isinstance(p, bp.figure):
+            panel_list_rendered.append(p)
+        else:
+            panel_list_rendered.append(hv.render(p))
+    return panel_list_rendered
 
 
 def _format_bokeh_panel(
