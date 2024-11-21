@@ -127,7 +127,7 @@ def export_main_figure(panel_list):
 def export_sensitivity_figure(panel_list):
     panel_list = _render_panels(panel_list)
     panel_label_list = ["A.", "B.", "C."]
-    show_legend_list = [True] * len(panel_list)
+    show_legend_list = [True, False, False]
     legend_location_list = [None, None, None]
     for p, show_legend, legend_location, panel_label in zip(
         panel_list,
@@ -141,7 +141,7 @@ def export_sensitivity_figure(panel_list):
             legend_location=legend_location,
             panel_label=panel_label,
         )
-        p.title.offset = 755
+        p.title.offset = 770
     layout = bl.column(panel_list)
     figure_dir = opts.get_opts()["figure_dir"]
     panels_save_path = figure_dir / "sensitivity_location_model.svg"
