@@ -1,6 +1,5 @@
 fig_names = [
     "main",
-    "variance_plots",
     "sensitivity_location_model",
 ]
 
@@ -25,7 +24,8 @@ rule figures_svg:
 rule fig_svg:
     input:
         "src/opts.py",
-        "src/utils.py",
+        "src/figure_export.py",
+        "src/summary_plot.py",
         "figures/main_template.svg",
         "src/{fig_name}.ipynb",
     output:
