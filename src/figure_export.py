@@ -3,6 +3,7 @@ import bokeh.plotting as bp
 import holoviews as hv
 import svgutils.transform as svgt
 from bokeh.io import export_svg
+from lxml import etree
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -96,8 +97,9 @@ def export_sensitivity_figure(panel_list):
         )
     layout = bl.column(panel_list)
     figure_dir = opts.get_opts()["figure_dir"]
-    panels_save_path = figure_dir / "sensitivity_location_model.svg"
-    _export_figure(layout, save_path=panels_save_path)
+    save_path = figure_dir / "sensitivity_location_model.svg"
+    _export_figure(layout, save_path=save_path)
+    _italicize_mosquito_species(save_path)
 
 
 def _render_panels(panel_list):
@@ -167,3 +169,32 @@ def _export_figure(bokeh_fig, save_path):
         options=WEBDRIVER_OPTIONS, service=WEBDRIVER_SERVICE
     ) as driver:
         export_svg(bokeh_fig, filename=save_path, webdriver=driver)
+
+
+def _italicize_mosquito_species(svg_path):
+    # Italicise mosquito species names in an SVG file (needed as Bokeh does not support
+    # mixed font styles in text labels)
+    fig = svgt.fromfile(svg_path)
+    for element in fig.root.findall(".//{http://www.w3.org/2000/svg}text"):
+        text = element.text
+        if text in ["(Ae. albopictus)", "(Ae. aegypti)"]:
+            species_name = text[1:-1]
+            # Clear the current text
+            element.text = ""
+            # Add a non-italic <tspan> for the opening bracket
+            tspan_prefix = etree.Element("tspan")
+            tspan_prefix.text = "("
+            element.append(tspan_prefix)
+            # Add an italic <tspan> for the mosquito name
+            tspan_name = etree.Element("tspan")
+            tspan_name.text = species_name
+            tspan_name.set("font-style", "italic")
+            element.append(tspan_name)
+            # Add a non-italic <tspan> for the closing bracket
+            tspan_suffix = etree.Element("tspan")
+            tspan_suffix.text = ")"
+            if species_name == "Ae. aegypti":
+                # Adjust the x-offset for the closing bracket to avoid overlap
+                tspan_suffix.set("dx", "1.5")
+            element.append(tspan_suffix)
+    fig.save(svg_path)
