@@ -14,7 +14,9 @@ def make_summary_plot(
     uncertainty_level=None,
     **kwargs,
 ):
-    # Plot
+    # Make a summary plot showing contributions to uncertainty from internal climate
+    # variability, model uncertainty, and scenario uncertainty in different locations
+    # and years.
     ds_plot = (
         ds.climepi.uncertainty_interval_decomposition(
             data_var, polyfit_degree=polyfit_degree, uncertainty_level=uncertainty_level
