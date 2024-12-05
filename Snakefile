@@ -21,17 +21,28 @@ rule figures_svg:
         ),
 
 
-rule fig_svg:
+rule main_fig_svg:
+    input:
+        "src/opts.py",
+        "src/figure_export.py",
+        "figures/main_template.svg",
+        "src/main.ipynb",
+    output:
+        "figures/main.svg",
+    notebook:
+        "src/main.ipynb"
+
+
+rule sensitivity_fig_svg:
     input:
         "src/opts.py",
         "src/figure_export.py",
         "src/summary_plot.py",
-        "figures/main_template.svg",
-        "src/{fig_name}.ipynb",
+        "src/sensitivity_location_model.ipynb",
     output:
-        "figures/{fig_name}.svg",
+        "figures/sensitivity_location_model.svg",
     notebook:
-        "src/{wildcards.fig_name}.ipynb"
+        "src/sensitivity_location_model.ipynb"
 
 
 rule fig_svg_to_pdf:
