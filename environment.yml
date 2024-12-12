@@ -4,43 +4,23 @@ channels:
   - bioconda
   - nodefaults
 dependencies:
-  # Core
-  - python>=3.8
-  - pip
-  # Climepi dependencies (to ensure installed from conda-forge not pip)
-  - bottleneck
-  - dask
-  - datashader
-  - flox
-  - geopy
-  - geoviews
-  - h5netcdf
-  - hvplot
-  - intake
-  - intake-esm  
-  - nc-time-axis
-  - numpy
-  - pandas
-  - panel
-  - param
-  - pooch
-  - requests
-  - s3fs # needed when using intake-esm to access CESM data on AWS server
-  - urllib3
-  - xarray!=2024.10.0
-  - xcdat
   # Climepi package
-  - pip:
-    - git+https://github.com/will-s-hart/climate-epidemics.git
+  - climepi
+  # General
+  - numpy
+  # Figures
+  - bokeh
+  - holoviews
+  # Figure export
+  - lxml
+  - selenium
+  - svgutils
+  - webdriver-manager
   # Linting
   - ruff
   # Notebooks
   - ipykernel
   - jupyter_bokeh
   - nbconvert
-  # Paper figures
-  - selenium
-  - svgutils
-  - webdriver-manager
   # Workflow
   - snakemake
