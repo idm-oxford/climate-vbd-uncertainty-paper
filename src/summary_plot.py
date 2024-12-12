@@ -1,7 +1,4 @@
 import holoviews as hv
-import numpy as np
-import scipy.stats
-import xarray as xr
 from bokeh.models import ColumnDataSource, FactorRange
 from bokeh.plotting import figure
 
