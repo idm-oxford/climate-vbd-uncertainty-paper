@@ -1,24 +1,28 @@
+"""Module defining methods for exporting bokeh/holoviews figures to SVG."""
+
 import bokeh.layouts as bl
 import bokeh.plotting as bp
 import holoviews as hv
 import svgutils.transform as svgt
 from bokeh.io import export_svg
 from lxml import etree
-from selenium import webdriver
+from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
 import opts
 
 WEBDRIVER_SERVICE = ChromeService(ChromeDriverManager().install())
-WEBDRIVER_OPTIONS = webdriver.ChromeOptions()
+WEBDRIVER_OPTIONS = ChromeOptions()
 WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def export_main_figure(panel_list):
     """
-    Export the main figure to SVG by combining the panels, formatting them, adding
-    panel labels, and then appending them to a template.
+    Export the main figure to SVG.
+
+    Combines the panels, formats them, adds panel labels, and appends panels to a
+    template, before exporting the figure.
     """
     panel_list = _render_panels(panel_list)
     panel_label_list = [
@@ -74,8 +78,10 @@ def export_main_figure(panel_list):
 
 def export_sensitivity_figure(panel_list):
     """
-    Export the sensitivity figure to SVG by combining the panels, formatting them,
-    and adding panel labels.
+    Export the sensitivity figure to SVG.
+
+    Combines the panels, formats them, and adds panel labels, before exporting the
+    figure.
     """
     panel_list = _render_panels(panel_list)
     panel_label_list = ["A.", "B.", "C."]
@@ -165,9 +171,7 @@ def _format_bokeh_panel(
 
 
 def _export_figure(bokeh_fig, save_path):
-    with webdriver.Chrome(
-        options=WEBDRIVER_OPTIONS, service=WEBDRIVER_SERVICE
-    ) as driver:
+    with Chrome(options=WEBDRIVER_OPTIONS, service=WEBDRIVER_SERVICE) as driver:
         export_svg(bokeh_fig, filename=save_path, webdriver=driver)
 
 

@@ -1,9 +1,12 @@
+"""Module defining data, model and plotting options."""
+
 import pathlib
 
 import numpy as np
 
 
 def get_opts():
+    """Return a dictionary of data, model and plotting options."""
     year_range = [2030, 2100]  # inclusive
     location_default = "London"
     locations_additional = ["Paris", "Los Angeles", "Istanbul", "Cape Town"]

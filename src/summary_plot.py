@@ -1,3 +1,5 @@
+"""Module for making summary plots of uncertainty in different locations and years."""
+
 import holoviews as hv
 from bokeh.models import ColumnDataSource, FactorRange
 from bokeh.plotting import figure
@@ -11,9 +13,13 @@ def make_summary_plot(
     uncertainty_level=None,
     **kwargs,
 ):
-    # Make a summary plot showing contributions to uncertainty from internal climate
-    # variability, model uncertainty, and scenario uncertainty in different locations
-    # and years.
+    """
+    Make a summary plot.
+
+    Makes a grouped bar plot showing contributions to uncertainty from internal climate
+    variability, model uncertainty, and scenario uncertainty in different locations
+    and years.
+    """
     ds_plot = (
         ds.climepi.uncertainty_interval_decomposition(
             data_var, polyfit_degree=polyfit_degree, uncertainty_level=uncertainty_level
