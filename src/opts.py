@@ -31,9 +31,9 @@ def get_opts():
     }
     plot_opts_epi = {
         **plot_opts_base,
-        "ylim": (0, 7),
-        "yticks": np.arange(8),
-        "ylabel": "Months suitable for transmission",
+        "ylim": (0, 210),
+        "yticks": np.arange(211, step=30),
+        "ylabel": "Days suitable for transmission",
     }
     data_base_dir = pathlib.Path(__file__).parents[1] / "data"
     figure_dir = pathlib.Path(__file__).parents[1] / "figures"

@@ -64,7 +64,7 @@ def export_main_figure(panel_list):
     col1 = bl.column(panel_list[0:3])
     col2 = bl.column(panel_list[3:])
     layout = bl.row([col1, bl.Spacer(width=50), col2])
-    # Export combined panels to SV
+    # Export combined panels to SVG
     figure_dir = opts.get_opts()["figure_dir"]
     panels_save_path = figure_dir / "main_panels.svg"
     _export_figure(layout, save_path=panels_save_path)
