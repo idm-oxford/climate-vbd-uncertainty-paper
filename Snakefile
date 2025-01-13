@@ -1,6 +1,7 @@
 fig_names = [
     "main",
-    "sensitivity_location_model",
+    "summary_location_species",
+    "sensitivity_niche",
 ]
 
 
@@ -33,16 +34,27 @@ rule main_fig_svg:
         "src/main.ipynb"
 
 
-rule sensitivity_fig_svg:
+rule summary_fig_svg:
     input:
         "src/opts.py",
         "src/figure_export.py",
         "src/summary_plot.py",
-        "src/sensitivity_location_model.ipynb",
+        "src/summary_location_species.ipynb",
     output:
-        "figures/sensitivity_location_model.svg",
+        "figures/summary_location_species.svg",
     notebook:
-        "src/sensitivity_location_model.ipynb"
+        "src/summary_location_species.ipynb"
+
+
+rule sensitivity_fig_svg:
+    input:
+        "src/opts.py",
+        "src/figure_export.py",
+        "src/sensitivity_niche.ipynb",
+    output:
+        "figures/sensitivity_niche.svg",
+    notebook:
+        "src/sensitivity_niche.ipynb"
 
 
 rule fig_svg_to_pdf:

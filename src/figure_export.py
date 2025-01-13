@@ -76,9 +76,9 @@ def export_main_figure(panel_list):
     fig.save(final_save_path)
 
 
-def export_sensitivity_figure(panel_list):
+def export_summary_figure(panel_list):
     """
-    Export the sensitivity figure to SVG.
+    Export the summary figure to SVG.
 
     Combines the panels, formats them, and adds panel labels, before exporting the
     figure.
@@ -103,9 +103,37 @@ def export_sensitivity_figure(panel_list):
         )
     layout = bl.column(panel_list)
     figure_dir = opts.get_opts()["figure_dir"]
-    save_path = figure_dir / "sensitivity_location_model.svg"
+    save_path = figure_dir / "summary_location_species.svg"
     _export_figure(layout, save_path=save_path)
     _italicize_mosquito_species(save_path)
+
+
+def export_sensitivity_figure(panel_list):
+    """
+    Export the sensitivity figure to SVG.
+
+    Combines the panels, formats them, and adds panel labels, before exporting the
+    figure.
+    """
+    panel_list = _render_panels(panel_list)
+    panel_label_list = ["A.", "B."]
+    for p, panel_label in zip(
+        panel_list,
+        panel_label_list,
+    ):
+        _format_bokeh_panel(
+            p,
+            reverse_legend_entries=True,
+            attrs={
+                "title.text": panel_label,
+                # "title.offset": 337.5,
+                "title.standoff": 2.5,
+            },
+        )
+    layout = bl.row(panel_list)
+    figure_dir = opts.get_opts()["figure_dir"]
+    save_path = figure_dir / "sensitivity_niche.svg"
+    _export_figure(layout, save_path=save_path)
 
 
 def _render_panels(panel_list):
