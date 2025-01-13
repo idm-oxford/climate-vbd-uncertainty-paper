@@ -126,7 +126,6 @@ def export_sensitivity_figure(panel_list):
             reverse_legend_entries=True,
             attrs={
                 "title.text": panel_label,
-                # "title.offset": 337.5,
                 "title.standoff": 2.5,
             },
         )
