@@ -24,3 +24,7 @@ dependencies:
   - nbconvert
   # Workflow
   - snakemake
+  # Weather data
+  - pip
+  - pip:
+    - meteostat

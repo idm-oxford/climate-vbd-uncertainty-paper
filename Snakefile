@@ -34,8 +34,18 @@ rule main_fig_svg:
         "src/main.ipynb"
 
 
+rule weather_data:
+    input:
+        "src/weather_data.ipynb",
+    output:
+        "data/weather_2020.nc",
+    notebook:
+        "src/weather_data.ipynb"
+
+
 rule summary_fig_svg:
     input:
+        "data/weather_2020.nc",
         "src/opts.py",
         "src/figure_export.py",
         "src/summary_plot.py",
