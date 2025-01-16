@@ -1,12 +1,14 @@
 """Module for making summary plots of uncertainty in different locations and years."""
 
 import holoviews as hv
+import xarray as xr
 from bokeh.models import ColumnDataSource, FactorRange
 from bokeh.plotting import figure
 
 
 def make_summary_plot(
     ds,
+    ds_historical=None,
     data_var=None,
     years_summary=None,
     polyfit_degree=None,
@@ -24,10 +26,23 @@ def make_summary_plot(
         ds.climepi.uncertainty_interval_decomposition(
             data_var, polyfit_degree=polyfit_degree, uncertainty_level=uncertainty_level
         )[data_var]
-        .sel(time=ds.time.dt.year.isin(years_summary))
+        .sel(time=ds["time.year"].isin(years_summary))
         .to_dataset(dim="level")
+        .compute()
     )
-    ds_plot["time"] = ds_plot["time.year"].astype("str")
+    ds_plot = ds_plot.assign_coords(time=ds_plot["time.year"].astype("str"))
+
+    #
+
+    ds_plot_historical = (
+        ds_historical[[data_var]]
+        .assign_coords(time=ds_historical.time.dt.year.astype("str"))
+        .rename({data_var: "historical"})
+    )
+    ds_plot = xr.merge([ds_plot, ds_plot_historical])
+
+    #
+
     source = ColumnDataSource(ds_plot.to_dataframe(dim_order=["location", "time"]))
     colors = hv.Cycle().values
     p = figure(
@@ -67,6 +82,15 @@ def make_summary_plot(
         line_color="black",
         line_width=2,
         width=0.8,
+    )
+    p.scatter(
+        x="location_time",
+        y="historical",
+        source=source,
+        color="black",
+        marker="x",
+        size=15,
+        line_width=2,
     )
     # Formatting
     if "ylim" in kwargs:

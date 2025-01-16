@@ -1,6 +1,7 @@
 """Module defining methods for exporting bokeh/holoviews figures to SVG."""
 
 import bokeh.layouts as bl
+import bokeh.models as bm
 import bokeh.plotting as bp
 import holoviews as hv
 import svgutils.transform as svgt
@@ -97,15 +98,38 @@ def export_summary_figure(panel_list):
                 "frame_width": 720,
                 "frame_height": 180,
                 "legend.visible": show_legend,
+                # "legend.spacing": 1,
+                # "legend.margin": 5,
+                # "legend.padding": 3,
+                # "legend.location": (0, -10),
                 "title.text": panel_label,
-                "title.offset": 772.5,
+                "title.offset": 777.5,
+                "x_range.group_padding": 0.25,
+                "x_range.range_padding": 0.1,
+                "x_range.range_padding_units": "absolute",
             },
         )
+    # Hack to have legend outside of the plot area for the first panel
+    p = panel_list[0]
+    p.legend.visible = False
+    p.add_layout(
+        bm.Legend(
+            items=p.legend.items,
+            location=(-710, 95),
+            label_text_font_size="10pt",
+            margin=5,
+            padding=5,
+        ),
+        "right",
+    )
+    # Export combined panels to SVG
     layout = bl.column(panel_list)
     figure_dir = opts.get_opts()["figure_dir"]
     save_path = figure_dir / "summary_location_species.svg"
     _export_figure(layout, save_path=save_path)
     _italicize_mosquito_species(save_path)
+    # Resize to remove whitespace from putting legend in right side panel
+    _resize_svg(save_path, width=810)
 
 
 def export_sensitivity_figure(panel_list):
@@ -166,8 +190,6 @@ def _format_bokeh_panel(
         "xaxis.major_label_text_font_size": "10pt",
         "yaxis.major_label_text_font_size": "10pt",
         "xaxis.group_text_font_size": "10pt",
-        "x_range.range_padding": 0.075,
-        "x_range.group_padding": 0.5,
         "legend.label_text_font_size": "10pt",
         "legend.margin": 5,
         "legend.padding": 5,
@@ -206,6 +228,7 @@ def _italicize_mosquito_species(svg_path):
     # Italicise mosquito species names in an SVG file (needed as Bokeh does not support
     # mixed font styles in text labels)
     fig = svgt.fromfile(svg_path)
+    fig.set_size((fig.width, fig.height))
     for element in fig.root.findall(".//{http://www.w3.org/2000/svg}text"):
         text = element.text
         if text in ["(Ae. albopictus)", "(Ae. aegypti)"]:
@@ -228,4 +251,13 @@ def _italicize_mosquito_species(svg_path):
                 # Adjust the x-offset for the closing bracket to avoid overlap
                 tspan_suffix.set("dx", "1.5")
             element.append(tspan_suffix)
+    fig.save(svg_path)
+
+
+def _resize_svg(svg_path, width=None, height=None):
+    # Resize an SVG file
+    fig = svgt.fromfile(svg_path)
+    width = str(width or fig.width)
+    height = str(height or fig.height)
+    fig.set_size((width, height))
     fig.save(svg_path)
