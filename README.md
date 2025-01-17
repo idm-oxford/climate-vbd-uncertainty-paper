@@ -1,5 +1,5 @@
-# climate-disease-uncertainty
-Code underlying manuscript. To reproduce the figures, download the source code and
+# climate-disease-uncertainty-paper
+Code accompanying manuscript. To reproduce the figures, download the source code and
 create a `conda` virtual environment with the required dependencies:
 ```
 climate-disease-uncertainty $ conda env create -f environment.yml
