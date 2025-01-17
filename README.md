@@ -1,5 +1,8 @@
 # climate-vbd-uncertainty-paper
-Code accompanying manuscript. To reproduce the figures, download the source code and
+
+Code accompanying manuscript.
+
+To reproduce the figures, download the source code and
 create a `conda` virtual environment with the required dependencies:
 ```
 climate-vbd-uncertainty-paper $ conda env create -f environment.yml
