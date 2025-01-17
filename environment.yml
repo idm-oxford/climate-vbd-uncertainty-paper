@@ -1,11 +1,11 @@
-name: climate-disease-uncertainty
+name: climate-vbd-uncertainty
 channels:
   - conda-forge
   - bioconda
   - nodefaults
 dependencies:
   # Climepi package
-  - climepi
+  - climepi=0.2.0
   # General
   - numpy
   # Figures
