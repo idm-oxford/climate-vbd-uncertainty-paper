@@ -9,7 +9,7 @@ def get_opts():
     """Return a dictionary of data, model and plotting options."""
     year_range = [2030, 2100]  # inclusive
     location_default = "London"
-    locations_additional = ["Paris", "Los Angeles", "Istanbul", "Cape Town"]
+    locations_additional = ["Paris", "Istanbul", "Cape Town", "Los Angeles"]
     epi_model_name_default = "mordecai_ae_albopictus_niche"
     epi_model_species_default = "Ae. albopictus"
     epi_model_name_additional = "mordecai_ae_aegypti_niche"
