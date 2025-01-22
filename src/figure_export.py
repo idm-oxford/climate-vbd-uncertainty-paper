@@ -115,7 +115,7 @@ def export_summary_figure(panel_list):
     p.add_layout(
         bm.Legend(
             items=p.legend.items,
-            location=(-710, 95),
+            location=(-710, 77.5),
             label_text_font_size="10pt",
             margin=5,
             padding=5,
