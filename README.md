@@ -2,6 +2,11 @@
 
 Code accompanying manuscript.
 
+Note that the author-developed `climepi` Python package
+(distributed via `conda-forge`, with source code available at
+https://github.com/idm-oxford/climate-epidemics) is used extensively in the manuscript
+code.
+
 To reproduce the figures, download the source code and
 create a `conda` virtual environment with the required dependencies:
 ```
