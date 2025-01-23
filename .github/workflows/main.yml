@@ -15,4 +15,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climepi-web-app main
+        run: git push https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty main
