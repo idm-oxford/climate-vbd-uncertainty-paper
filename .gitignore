@@ -166,3 +166,7 @@ cython_debug/
 
 # Snakemake
 .snakemake/
+
+# Jekyll
+_site/
+Gemfile.lock
