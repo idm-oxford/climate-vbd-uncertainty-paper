@@ -1,4 +1,13 @@
-# climate-vbd-uncertainty-paper
+---
+title: climate-vbd-uncertainty-paper
+emoji: 📈
+colorFrom: blue
+colorTo: yellow
+sdk: docker
+pinned: false
+license: gpl-3.0
+short_description: Impact of climate uncertainty on VBD suitability projections
+---
 
 Code accompanying manuscript.
 
@@ -6,6 +15,12 @@ Note that the author-developed `climepi` Python package
 (distributed via `conda-forge`, with source code available at
 https://github.com/idm-oxford/climate-epidemics) is used extensively in the manuscript
 code.
+
+In addition to code for reproducing the figures in the manuscript, this repository
+provides source code for a web app available at
+https://idm-oxford.github.io/climate-vbd-uncertainty-paper/, which is hosted on
+[Hugging Face spaces](
+https://huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty).
 
 To reproduce the figures, download the source code and
 create a `conda` virtual environment with the required dependencies:
