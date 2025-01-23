@@ -1,12 +1,6 @@
 ---
-title: climate-vbd-uncertainty-paper
-emoji: 📈
-colorFrom: blue
-colorTo: yellow
 sdk: docker
-pinned: false
 license: gpl-3.0
-short_description: Impact of climate uncertainty on VBD suitability projections
 ---
 
 Code accompanying manuscript.
