@@ -7,7 +7,7 @@ channels = ["conda-forge", "bioconda"]
 platforms = ["linux-64", "linux-aarch64", "osx-arm64", "osx-64", "win-64"]
 
 [tool.pixi.dependencies]
-climepi = "0.3.1"
+climepi = "==0.3.1"
 numpy = "*"
 bokeh = "<3.6"
 holoviews = "*"
