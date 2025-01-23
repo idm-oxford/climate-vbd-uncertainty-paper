@@ -24,47 +24,47 @@ rule figures_svg:
 
 rule main_fig_svg:
     input:
-        "src/opts.py",
-        "src/figure_export.py",
+        "paper_code/opts.py",
+        "paper_code/figure_export.py",
         "figures/main_template.svg",
-        "src/main.ipynb",
+        "paper_code/main.ipynb",
     output:
         "figures/main.svg",
     notebook:
-        "src/main.ipynb"
+        "paper_code/main.ipynb"
 
 
 rule weather_data:
     input:
-        "src/weather_data.ipynb",
+        "paper_code/weather_data.ipynb",
     output:
         "data/weather_2020.nc",
     notebook:
-        "src/weather_data.ipynb"
+        "paper_code/weather_data.ipynb"
 
 
 rule summary_fig_svg:
     input:
         "data/weather_2020.nc",
-        "src/opts.py",
-        "src/figure_export.py",
-        "src/summary_plot.py",
-        "src/summary_location_species.ipynb",
+        "paper_code/opts.py",
+        "paper_code/figure_export.py",
+        "paper_code/summary_plot.py",
+        "paper_code/summary_location_species.ipynb",
     output:
         "figures/summary_location_species.svg",
     notebook:
-        "src/summary_location_species.ipynb"
+        "paper_code/summary_location_species.ipynb"
 
 
 rule sensitivity_fig_svg:
     input:
-        "src/opts.py",
-        "src/figure_export.py",
-        "src/sensitivity_niche.ipynb",
+        "paper_code/opts.py",
+        "paper_code/figure_export.py",
+        "paper_code/sensitivity_niche.ipynb",
     output:
         "figures/sensitivity_niche.svg",
     notebook:
-        "src/sensitivity_niche.ipynb"
+        "paper_code/sensitivity_niche.ipynb"
 
 
 rule fig_svg_to_pdf:
