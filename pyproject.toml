@@ -1,0 +1,37 @@
+[project]
+name = "climate-vbd-uncertainty"
+requires-python = ">=3.10"
+
+[tool.pixi.project]
+channels = ["conda-forge", "bioconda"]
+platforms = ["linux-64", "linux-aarch64", "osx-arm64", "osx-64", "win-64"]
+
+[tool.pixi.dependencies]
+climepi = "0.3.1"
+numpy = "*"
+bokeh = "<3.6"
+holoviews = "*"
+lxml = "*"
+selenium = "*"
+svgutils = "*"
+webdriver-manager = "*"
+ruff = "*"
+ipykernel = "*"
+jupyter_bokeh = "*"
+nbconvert = "*"
+snakemake = "*"
+
+[tool.pixi.pypi-dependencies]
+meteostat = "*"
+
+[tool.pixi.feature.dev.dependencies]
+ruff = "*"
+
+[tool.pixi.environments]
+default = { features = ["dev"], solve-group = "prod" }
+prod = { features = [], solve-group = "prod" }
+
+[tool.pixi.feature.dev.tasks]
+lint = "ruff check"
+format = "ruff format"
+figures = "snakemake --cores 1"
