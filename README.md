@@ -3,7 +3,7 @@ sdk: docker
 license: gpl-3.0
 ---
 
-Code accompanying manuscript.
+Python code accompanying manuscript.
 
 Note that the author-developed `climepi` Python package
 (distributed via `conda-forge`, with source code available at
