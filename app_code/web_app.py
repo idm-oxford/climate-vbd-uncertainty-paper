@@ -14,6 +14,7 @@ if __name__ == "__main__":
     run_app(
         clim_dataset_example_base_dir=clim_dataset_example_base_dir,
         clim_dataset_example_names=clim_dataset_example_names,
+        epi_model_example_names=epi_model_example_names,
         enable_custom_epi_model=False,
         dask_distributed=True,
         address="0.0.0.0",
