@@ -3,7 +3,9 @@ sdk: docker
 license: gpl-3.0
 ---
 
-Python code accompanying manuscript.
+Python code accompanying manuscript “Internal climate variability amplifies the need for
+vector-borne disease outbreak preparedness” by Hart *et al*.
+
 
 Note that the author-developed `climepi` Python package
 (distributed via `conda-forge`, with source code available at
@@ -17,7 +19,7 @@ https://idm-oxford.github.io/climate-vbd-uncertainty-paper/, which is hosted on
 https://huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty).
 
 To reproduce the figures, download the source code and
-create a `conda` virtual environment with the required dependencies:
+create a ``conda`` virtual environment named 'climate-vbd-uncertainty' with the required dependencies:
 ```
 climate-vbd-uncertainty-paper $ conda env create -f environment.yml
 ```
@@ -27,7 +29,7 @@ climate-vbd-uncertainty-paper $ mamba env create -f environment.yml
 ```
 
 The figures (in SVG format) can then be reproduced by executing the notebooks in the
-``src`` directory using the ``climate-vbd-uncertainty`` environment created in the above
+``src`` directory using the 'climate-vbd-uncertainty' environment created in the above
 step.
 
 Alternatively, all figures can be reproduced using ``snakemake``:
