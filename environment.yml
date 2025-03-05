@@ -10,7 +10,7 @@ dependencies:
   # General
   - numpy
   # Figures
-  - bokeh<3.6 #https://github.com/bokeh/bokeh/issues/14164
+  - bokeh>=3.6.3 #https://github.com/bokeh/bokeh/issues/14164
   - holoviews
   # Figure export
   - lxml

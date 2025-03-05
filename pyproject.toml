@@ -9,7 +9,7 @@ platforms = ["linux-64", "linux-aarch64", "osx-arm64", "osx-64", "win-64"]
 [tool.pixi.dependencies]
 climepi = "==0.4.1"
 numpy = "*"
-bokeh = "<3.6"
+bokeh = ">=3.6.3"
 holoviews = "*"
 lxml = "*"
 selenium = "*"
@@ -35,3 +35,4 @@ prod = { features = [], solve-group = "prod" }
 lint = "ruff check"
 format = "ruff format"
 figures = "snakemake --cores 1"
+figures_force = "snakemake --cores 1 --forceall"
