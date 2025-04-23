@@ -14,8 +14,11 @@ def get_opts():
     epi_model_species_default = "Ae. albopictus"
     epi_model_name_additional = "mordecai_ae_aegypti_niche"
     epi_model_species_additional = "Ae. aegypti"
-    uncertainty_level = 90
-    polyfit_degree = 3
+    ensemble_stats_kwargs = {
+        "internal_variability_method": "polyfit",
+        "deg": 3,
+        "uncertainty_level": 90,
+    }
     plot_opts_base = {
         "title": "",
         "xlim": (year_range[0], year_range[1]),
@@ -45,8 +48,7 @@ def get_opts():
         "epi_model_species_default": epi_model_species_default,
         "epi_model_name_additional": epi_model_name_additional,
         "epi_model_species_additional": epi_model_species_additional,
-        "uncertainty_level": uncertainty_level,
-        "polyfit_degree": polyfit_degree,
+        "ensemble_stats_kwargs": ensemble_stats_kwargs,
         "plot_opts_clim": plot_opts_clim,
         "plot_opts_epi": plot_opts_epi,
         "data_base_dir": data_base_dir,

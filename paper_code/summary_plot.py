@@ -11,9 +11,11 @@ def make_summary_plot(
     ds_historical=None,
     data_var=None,
     years_summary=None,
-    polyfit_degree=None,
-    uncertainty_level=None,
-    **kwargs,
+    ylim=None,
+    yticks=None,
+    ylabel="",
+    legend_location="top_left",
+    **kwargs_uncertainty_interval_decomposition,
 ):
     """
     Make a summary plot.
@@ -24,7 +26,7 @@ def make_summary_plot(
     """
     ds_plot = (
         ds.climepi.uncertainty_interval_decomposition(
-            data_var, polyfit_degree=polyfit_degree, uncertainty_level=uncertainty_level
+            data_var, **kwargs_uncertainty_interval_decomposition
         )[data_var]
         .sel(time=ds["time.year"].isin(years_summary))
         .to_dataset(dim="level")
@@ -93,12 +95,12 @@ def make_summary_plot(
         line_width=2,
     )
     # Formatting
-    if "ylim" in kwargs:
-        p.y_range.start, p.y_range.end = kwargs["ylim"]
-    if "yticks" in kwargs:
-        p.yaxis.ticker = kwargs["yticks"]
-    p.yaxis.axis_label = kwargs.get("ylabel", "")
-    p.legend.location = kwargs.get("legend_location", "top_left")
+    if ylim is not None:
+        p.y_range.start, p.y_range.end = ylim
+    if yticks is not None:
+        p.yaxis.ticker = yticks
+    p.yaxis.axis_label = ylabel
+    p.legend.location = legend_location
     p.xgrid.grid_line_color = None
     p.ygrid.grid_line_color = None
     return p

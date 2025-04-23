@@ -4,14 +4,13 @@ import bokeh.layouts as bl
 import bokeh.models as bm
 import bokeh.plotting as bp
 import holoviews as hv
+import opts
 import svgutils.transform as svgt
 from bokeh.io import export_svg
 from lxml import etree
 from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-
-import opts
 
 WEBDRIVER_SERVICE = ChromeService(ChromeDriverManager().install())
 WEBDRIVER_OPTIONS = ChromeOptions()
@@ -56,6 +55,7 @@ def export_main_figure(panel_list):
         panel_list,
         reverse_legend_entries_list,
         attrs_list,
+        strict=True,
     ):
         _format_bokeh_panel(
             p,
@@ -91,6 +91,7 @@ def export_summary_figure(panel_list):
         panel_list,
         show_legend_list,
         panel_label_list,
+        strict=True,
     ):
         _format_bokeh_panel(
             p,
@@ -144,6 +145,7 @@ def export_sensitivity_figure(panel_list):
     for p, panel_label in zip(
         panel_list,
         panel_label_list,
+        strict=True,
     ):
         _format_bokeh_panel(
             p,
