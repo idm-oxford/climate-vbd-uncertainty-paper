@@ -1,7 +1,7 @@
 fig_names = [
     "main",
     "summary_location_species",
-    "sensitivity_niche",
+    "sensitivity_splines",
 ]
 
 

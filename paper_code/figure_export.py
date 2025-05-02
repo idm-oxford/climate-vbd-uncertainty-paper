@@ -17,7 +17,7 @@ WEBDRIVER_OPTIONS = ChromeOptions()
 WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
-def export_main_figure(panel_list):
+def export_main_figure(panel_list, file_name="main.svg"):
     """
     Export the main figure to SVG.
 
@@ -71,7 +71,7 @@ def export_main_figure(panel_list):
     _export_figure(layout, save_path=panels_save_path)
     # Add panels to figure template and save again
     template_path = figure_dir / "main_template.svg"
-    final_save_path = figure_dir / "main.svg"
+    final_save_path = figure_dir / file_name
     fig = svgt.fromfile(template_path)
     fig.append(svgt.fromfile(panels_save_path).getroot())
     fig.save(final_save_path)
