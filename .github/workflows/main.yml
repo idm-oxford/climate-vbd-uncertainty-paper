@@ -14,16 +14,16 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Create clean branch without binary files
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git checkout -b hf-sync
-          git rm -r --cached figures || true
-          git commit -m "Remove binary files for Hugging Face sync" || echo "No changes to commit"
-
-      - name: Push to Hugging Face Hub (clean branch -> main)
+      - name: Push to Hugging Face Hub (clean repo without figures)
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push -f https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty hf-sync:main
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git checkout --orphan hf-clean
+          git rm -rf . || true
+          git checkout main -- .
+          echo "figures/" >> .gitignore
+          git add .
+          git commit -m "Push cleaned repo without figures"
+          git push -f https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty hf-clean:main
