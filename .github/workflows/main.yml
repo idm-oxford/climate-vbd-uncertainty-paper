@@ -22,6 +22,8 @@ jobs:
           rsync -av --exclude='.git' --exclude='figures/' ./ clean/
           cd clean
           git init
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
           git remote add origin https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty
           git checkout -b main
           echo "figures/" >> .gitignore
