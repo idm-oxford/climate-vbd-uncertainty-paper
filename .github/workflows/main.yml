@@ -18,8 +18,9 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          mkdir clean && cd clean
-          rsync -av --exclude='figures/' ../ .
+          mkdir clean
+          rsync -av --exclude='.git' --exclude='figures/' ./ clean/
+          cd clean
           git init
           git remote add origin https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty
           git checkout -b main
