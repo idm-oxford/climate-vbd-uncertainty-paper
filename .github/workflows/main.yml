@@ -18,12 +18,12 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git checkout --orphan hf-clean
-          git rm -rf . || true
-          git checkout main -- .
+          mkdir clean && cd clean
+          rsync -av --exclude='figures/' ../ .
+          git init
+          git remote add origin https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty
+          git checkout -b main
           echo "figures/" >> .gitignore
           git add .
-          git commit -m "Push cleaned repo without figures"
-          git push -f https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty hf-clean:main
+          git commit -m "Clean push without binary files"
+          git push -f origin main
