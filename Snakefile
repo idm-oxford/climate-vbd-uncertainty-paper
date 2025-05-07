@@ -56,15 +56,16 @@ rule summary_fig_svg:
         "paper_code/summary_location_species.ipynb"
 
 
-rule sensitivity_fig_svg:
+rule splines_fig_svg:
     input:
         "paper_code/opts.py",
         "paper_code/figure_export.py",
-        "paper_code/sensitivity_niche.ipynb",
+        "figures/main_template.svg",
+        "paper_code/sensitivity_splines.ipynb",
     output:
-        "figures/sensitivity_niche.svg",
+        "figures/sensitivity_splines.svg",
     notebook:
-        "paper_code/sensitivity_niche.ipynb"
+        "paper_code/sensitivity_splines.ipynb"
 
 
 rule fig_svg_to_pdf:
