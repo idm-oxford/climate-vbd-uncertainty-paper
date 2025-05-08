@@ -1,31 +1,30 @@
 [project]
 name = "climate-vbd-uncertainty"
-requires-python = ">=3.10"
+requires-python = ">=3.12, <3.13"
 
 [tool.pixi.project]
 channels = ["conda-forge", "bioconda"]
 platforms = ["linux-64", "linux-aarch64", "osx-arm64", "osx-64", "win-64"]
 
 [tool.pixi.dependencies]
-climepi = "==0.5.0"
-numpy = "*"
-bokeh = ">=3.6.3"
-holoviews = "*"
-lxml = "*"
+climepi = "0.5.*"
+numpy = "2.2.*"
+bokeh = "3.7.*"
+holoviews = "1.20.*"
+lxml = "5.4.*"
 selenium = "*"
-svgutils = "*"
-webdriver-manager = "*"
-ruff = "*"
-ipykernel = "*"
-jupyter_bokeh = "*"
-nbconvert = "*"
-snakemake = "*"
+svgutils = "0.3.*"
+webdriver-manager = "4.0.*"
+ipykernel = "6.29.*"
+jupyter_bokeh = "4.0.*"
+nbconvert = "7.16.*"
+snakemake = "9.3.*"
 
 [tool.pixi.pypi-dependencies]
-meteostat = "*"
+meteostat = ">=1.6,<1.7"
 
 [tool.pixi.feature.dev.dependencies]
-ruff = "*"
+ruff = "0.11.*"
 
 [tool.pixi.environments]
 default = { features = ["dev"], solve-group = "prod" }

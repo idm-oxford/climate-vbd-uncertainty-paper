@@ -4,28 +4,28 @@ channels:
   - bioconda
   - nodefaults
 dependencies:
-  - python>=3.10
+  - python=3.12
   # Climepi package
-  - climepi=0.5.0
+  - climepi=0.5
   # General
-  - numpy
+  - numpy=2.2
   # Figures
-  - bokeh>=3.6.3 #https://github.com/bokeh/bokeh/issues/14164
-  - holoviews
+  - bokeh=3.7
+  - holoviews=1.20
   # Figure export
-  - lxml
-  - selenium
-  - svgutils
-  - webdriver-manager
+  - lxml=5.4
+  - selenium=4.32
+  - svgutils=0.3
+  - webdriver-manager=4.0
   # Linting
-  - ruff
+  - ruff=0.11
   # Notebooks
-  - ipykernel
-  - jupyter_bokeh
-  - nbconvert
+  - ipykernel=6.29
+  - jupyter_bokeh=4.0
+  - nbconvert=7.16
   # Workflow
-  - snakemake
+  - snakemake=9.3
   # Weather data
   - pip
   - pip:
-    - meteostat
+    - meteostat>=1.6,<1.7
