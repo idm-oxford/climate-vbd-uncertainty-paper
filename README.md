@@ -3,8 +3,8 @@ sdk: docker
 license: gpl-3.0
 ---
 
-Python code accompanying manuscript “Internal climate variability amplifies the need for
-vector-borne disease outbreak preparedness” by Hart *et al*.
+Python code and data accompanying manuscript “Internal climate variability amplifies the
+need for vector-borne disease outbreak preparedness” by Hart *et al*.
 
 
 Note that the author-developed `climepi` Python package
