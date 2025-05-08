@@ -3,6 +3,8 @@ sdk: docker
 license: gpl-3.0
 ---
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15318576.svg)](https://doi.org/10.5281/zenodo.15318576)
+
 Python code and data accompanying manuscript “Internal climate variability amplifies the
 need for vector-borne disease outbreak preparedness” by Hart *et al*.
 
