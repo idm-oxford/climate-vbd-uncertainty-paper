@@ -41,7 +41,7 @@ climate-vbd-uncertainty-paper $ mamba env create -f environment.yml
 ```
 
 The figures (in SVG format) can then be reproduced by executing the notebooks in the
-``paper_code`` directory using the 'climate-vbd-uncertainty' environment created in the
+'paper_code' directory using the 'climate-vbd-uncertainty' environment created in the
 above step.
 
 Alternatively, all figures can be reproduced using ``snakemake``:
