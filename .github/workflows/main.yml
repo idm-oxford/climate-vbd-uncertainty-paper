@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Push to Hugging Face Hub (clean repo without figures)
+      - name: Push to Hugging Face Hub (clean repo without unneeded binary files)
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
@@ -27,6 +27,7 @@ jobs:
           git remote add origin https://will-s-hart:$HF_TOKEN@huggingface.co/spaces/will-s-hart/climate-vbd-uncertainty
           git checkout -b main
           echo "figures/" >> .gitignore
+          echo "climepi/epimod/_example_data/kaye_ae_aegypti_niche.nc" >> .gitignore
           git add .
           git commit -m "Clean push without binary files"
           git push -f origin main
