@@ -5,8 +5,10 @@ channels:
   - nodefaults
 dependencies:
   - python=3.12
+  - pip
   # Climepi package
-  - climepi=0.5
+  - pip:
+      - -e .
   # General
   - numpy=2.2
   # Figures
@@ -26,6 +28,26 @@ dependencies:
   # Workflow
   - snakemake=9.3
   # Weather data
-  - pip
   - pip:
-    - meteostat>=1.6,<1.7
+      - meteostat>=1.6,<1.7
+  # Climepi dependencies
+  - bottleneck=1.5
+  - dask=2025.5
+  - datashader=0.18
+  - flox=0.10
+  - geopy=2.4
+  - geoviews=1.14
+  - hvplot=0.11
+  - intake=2.0
+  - intake-esm=2025.2
+  - nc-time-axis=1.4
+  - pandas=2.3
+  - panel=1.7
+  - param=2.2
+  - pooch=1.8
+  - requests=2.32
+  - s3fs=2025.5
+  - scipy=1.15
+  - urllib3=2.4
+  - xarray=2025.4
+  - xcdat=0.9

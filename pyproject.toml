@@ -1,5 +1,10 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "climate-vbd-uncertainty"
+name = "climepi"
+version = "0.5.3"
 requires-python = ">=3.12, <3.13"
 
 [tool.pixi.project]
@@ -7,7 +12,6 @@ channels = ["conda-forge", "bioconda"]
 platforms = ["linux-64", "linux-aarch64", "osx-arm64", "osx-64", "win-64"]
 
 [tool.pixi.dependencies]
-climepi = "0.5.*"
 numpy = "2.2.*"
 bokeh = "3.7.*"
 holoviews = "1.20.*"
@@ -19,8 +23,30 @@ ipykernel = "6.29.*"
 jupyter_bokeh = "4.0.*"
 nbconvert = "7.16.*"
 snakemake = "9.3.*"
+# climepi dependencies
+bottleneck = "1.5.*"
+dask = "2025.5.*"
+datashader = "0.18.*"
+flox = "0.10.*"
+geopy = "2.4.*"
+geoviews = "1.14.*"
+hvplot = "0.11.*"
+intake = "2.0.*"
+intake-esm = "2025.2.*"
+nc-time-axis = "1.4.*"
+pandas = "2.3.*"
+panel = "1.7.*"
+param = "2.2.*"
+pooch = "1.8.*"
+requests = "2.32.*"
+s3fs = "2025.5.*"
+scipy = "1.15.*"
+urllib3 = "2.4.*"
+xarray = "2025.4.*"
+xcdat = "0.9.*"
 
 [tool.pixi.pypi-dependencies]
+climepi = { path = ".", editable = true }
 meteostat = ">=1.6,<1.7"
 
 [tool.pixi.feature.dev.dependencies]
@@ -35,3 +61,10 @@ lint = "ruff check"
 format = "ruff format"
 figures = "snakemake --cores 1"
 figures_force = "snakemake --cores 1 --forceall"
+
+[tool.setuptools.packages.find]
+include = ["climepi*"]
+
+[tool.setuptools.package-data]
+"climepi.climdata._example_registry_files" = ["*.txt"]
+"climepi.epimod._example_data" = ["*.nc"]
