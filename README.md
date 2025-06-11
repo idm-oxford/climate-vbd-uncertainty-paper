@@ -11,10 +11,9 @@ need for vector-borne disease outbreak preparedness” by Hart *et al*.
 This repository contains:
 - Code for reproducing the figures in the manuscript
     ('paper_code' directory).
-- A copy of the user-developed `climepi` package code (version 0.5.3) used in the
-    analyses ('climepi' directory). This package is also distributed via `conda-forge`
-    (see the package's main repository at
-    https://github.com/idm-oxford/climate-epidemics)
+- Code for the author-developed `climepi` package (version 0.5.3) used in the analyses
+    ('climepi' directory). This package is also distributed via `conda-forge` (see the
+    package's main repository at https://github.com/idm-oxford/climate-epidemics).
 - [Climate projection](
     https://www.isimip.org/gettingstarted/terms-of-use/terms-use-publicly-available-isimip-data-after-embargo-period/)
     and [recorded temperature](https://dev.meteostat.net/terms.html) data used in the
