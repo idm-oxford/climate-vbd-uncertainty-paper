@@ -15,6 +15,7 @@ COPY --from=build /app/.pixi/envs/prod /app/.pixi/envs/prod
 COPY --from=build --chmod=0755 /app/entrypoint.sh /app/entrypoint.sh
 COPY --chmod=0755 ./data /app/data
 COPY ./app_code /app/app_code
+COPY ./climepi /app/climepi
 
 RUN mkdir /.cache
 RUN chmod 777 /.cache
