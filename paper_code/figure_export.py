@@ -26,17 +26,16 @@ def export_main_figure(panel_list, file_name="main.svg"):
     """
     panel_list = _render_panels(panel_list)
     panel_label_list = [
-        "Internal climate variability",
-        "Climate model uncertainty",
-        "Scenario uncertainty",
-        "Climate projection uncertainty",
-        "Epidemiological projection uncertainty",
+        "A. Internal climate variability",
+        "B. Climate model uncertainty",
+        "C. Scenario uncertainty",
+        "D. Climate projection uncertainty",
+        "E. Epidemiological projection uncertainty",
     ]
     attrs_list = [
         {
             "title.text": ll,
             "title.align": "left",
-            "title.offset": -50,
             "title.standoff": 15,
         }
         for ll in panel_label_list
@@ -47,6 +46,13 @@ def export_main_figure(panel_list, file_name="main.svg"):
             "frame_height": 182,
             "title.text_font_size": "14pt",
             "yaxis.axis_label": "Annual mean temp. (°C)",
+            "title.offset": -50,
+        }
+    for i in range(3, 5):
+        attrs_list[i] = {
+            **attrs_list[i],
+            "title.text_font_size": "15.5pt",
+            "title.offset": -55,
         }
     attrs_list[4]["legend.visible"] = False
     reverse_legend_entries_list = [True, False, False, True, None]
@@ -64,7 +70,7 @@ def export_main_figure(panel_list, file_name="main.svg"):
         )
     col1 = bl.column(panel_list[0:3])
     col2 = bl.column(panel_list[3:])
-    layout = bl.row([col1, bl.Spacer(width=50), col2])
+    layout = bl.row([col1, bl.Spacer(width=45), col2])
     # Export combined panels to SVG
     figure_dir = opts.get_opts()["figure_dir"]
     panels_save_path = figure_dir / ("panels_" + file_name)
